@@ -7,11 +7,14 @@ import os
 import math
 import numpy as np
 import sys
+from hdfs3 import HDFileSystem
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
 inputF = sys.argv[1]
 outputF = sys.argv[2]
+
+hdfs = HDFileSystem(host='sandbox-hdp.hortonworks.com', port=8020)
 
 # Metodos necesarios
 def LimpiarBarrio(pBarrio):
@@ -22,7 +25,8 @@ def LimpiarBarrio(pBarrio):
     return pBarrio
 
 #Visualizamos que tenemos
-df = pd.read_csv(inputF,delimiter=';',dtype=str)
+with hdfs.open(inputF) as f:
+    df = pd.read_csv(f,delimiter=';',dtype=str)
 
 # generamos un .csv que sea facil de entender para el Tableau
 mCsv="Barrio;Anyo;Intervenciones" +os.linesep
@@ -39,8 +43,8 @@ for row in df.iterrows():
       mCsv = mCsv +vNewLine
 
 #Guardamos el .csv en el disco, en la zona ODS
-f = open(outputF,'w')
-f.write(mCsv)
+with hdfs.open(outputF) as f:
+    f.write(mCsv)
 f.close()
 
 
