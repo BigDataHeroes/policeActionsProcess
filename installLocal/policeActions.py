@@ -9,12 +9,10 @@ import numpy as np
 import sys
 from hdfs3 import HDFileSystem
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
 inputF = sys.argv[1]
 outputF = sys.argv[2]
 
-hdfs = HDFileSystem(host='sandbox-hdp.hortonworks.com', port=8020)
+hdfs = HDFileSystem(host='bdhKC', port=9000)
 
 # Metodos necesarios
 def LimpiarBarrio(pBarrio):
@@ -43,7 +41,7 @@ for row in df.iterrows():
       mCsv = mCsv +vNewLine
 
 #Guardamos el .csv en el disco, en la zona ODS
-with hdfs.open(outputF) as f:
+with hdfs.open(outputF, 'wb') as f:
     f.write(mCsv)
 f.close()
 

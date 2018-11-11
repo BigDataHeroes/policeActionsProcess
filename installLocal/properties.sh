@@ -1,3 +1,2 @@
-export scriptHome=/user/raj_ops/installProcessDocker/policeActionsEvolution
-export inputF=$scriptHome/data/IntervencionesPMun.csv
-export outputF=$scriptHome/data/IntervencionesPMun_processed.csv
+export inputF=/data/policeActions/IntervencionesPMun.csv
+export outputF=/data/policeActions/IntervencionesPMun_processed.csv

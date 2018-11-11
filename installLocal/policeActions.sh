@@ -1,6 +1,5 @@
 #!/bin/bash
 
-source activate keepcodingFinalProject
 source properties.sh
 
-python policeActions.py $inputF $outputF
+python3.7 policeActions.py $inputF $outputF
